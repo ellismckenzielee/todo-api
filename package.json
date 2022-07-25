@@ -1,0 +1,23 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "A restful API built using AWS CDK which could form the backend of a to-do list app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ellismckenzielee/todo-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ellismckenzielee/todo-api/issues"
+  },
+  "homepage": "https://github.com/ellismckenzielee/todo-api#readme",
+  "dependencies": {
+    "aws-cdk-lib": "^2.33.0"
+  }
+}
