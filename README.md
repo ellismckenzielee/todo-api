@@ -19,3 +19,8 @@ endpoints: {
     }
 }
 ```
+
+### Version Information
+
+- aws-cdk-lib: 2.33.0
+- node: v18.0.0
