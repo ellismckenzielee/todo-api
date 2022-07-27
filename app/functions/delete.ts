@@ -5,7 +5,7 @@ exports.handler = async () => {
 
   try {
     const data = await docClient
-      .delete({ TableName: process.env.TABLE_NAME || "", Key: "1" })
+      .delete({ TableName: process.env.TABLE_NAME || "", Key: { id: "1" } })
       .promise();
 
     return data;
