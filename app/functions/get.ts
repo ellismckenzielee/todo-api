@@ -8,7 +8,16 @@ exports.handler = async () => {
       .scan({ TableName: process.env.TABLE_NAME || "" })
       .promise();
 
-    return data;
+    let response = {
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      isBase64Encoded: false,
+      body: JSON.stringify(data),
+    };
+    console.log("RESPONSE!!!!!", response);
+    return response;
   } catch (err) {
     console.log("ERROR", err);
   }

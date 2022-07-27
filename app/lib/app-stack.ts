@@ -13,6 +13,10 @@ export class AppStack extends Stack {
       partitionKey: { name: "id", type: aws_dynamodb.AttributeType.STRING },
     });
     const api = new aws_apigateway.RestApi(this, "todo-api");
+    api.addApiKey("APIKEY", {
+      apiKeyName: "ELLIS_KEY",
+      value: process.env.API_KEY,
+    });
     const todos = api.root.addResource("todos");
     methods.forEach((method) => {
       const lambda = new aws_lambda_nodejs.NodejsFunction(this, method, {

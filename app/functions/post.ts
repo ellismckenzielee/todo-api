@@ -7,11 +7,20 @@ exports.handler = async () => {
     const data = await docClient
       .put({
         TableName: process.env.TABLE_NAME || "",
-        Item: { id: '3', username: "calippo" },
+        Item: { id: "3", username: "calippo" },
       })
       .promise();
 
-    return data;
+    let response = {
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      isBase64Encoded: false,
+      body: JSON.stringify(data),
+    };
+    console.log("RESPONSE!!!!!", response);
+    return response;
   } catch (err) {
     console.log("ERROR", err);
   }
