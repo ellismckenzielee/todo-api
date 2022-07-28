@@ -17,6 +17,7 @@ exports.handler = async (event: APIGatewayEvent) => {
           username: `${username}`,
           status: false,
         },
+        ReturnValues: "ALL_NEW",
       })
       .promise();
     return generateResponse(200, data);
