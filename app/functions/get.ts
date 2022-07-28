@@ -1,8 +1,8 @@
+import { APIGatewayEvent } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
-exports.handler = async () => {
+exports.handler = async (event: APIGatewayEvent) => {
   console.log("inside get function");
   const docClient = new DynamoDB.DocumentClient();
-
   try {
     const data = await docClient
       .scan({ TableName: process.env.TABLE_NAME || "" })

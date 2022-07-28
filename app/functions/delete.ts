@@ -4,7 +4,7 @@ exports.handler = async (event: APIGatewayEvent) => {
   console.log("inside delete function");
   const docClient = new DynamoDB.DocumentClient();
   const body = JSON.parse(event.body!);
-  const { id } = body.id;
+  const id = body.id;
   try {
     await docClient
       .delete({ TableName: process.env.TABLE_NAME || "", Key: { id: `${id}` } })

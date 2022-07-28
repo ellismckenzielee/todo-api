@@ -1,13 +1,15 @@
+import { APIGatewayEvent } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
-exports.handler = async () => {
+exports.handler = async (event: APIGatewayEvent) => {
   console.log("inside post function");
   const docClient = new DynamoDB.DocumentClient();
-
+  const body = JSON.parse(event.body!);
+  const { id, todo, username } = body;
   try {
     const data = await docClient
       .put({
         TableName: process.env.TABLE_NAME || "",
-        Item: { id: "3", username: "calippo" },
+        Item: { id: `${id}`, todo: `${todo}`, username: `${username}` },
       })
       .promise();
 
@@ -23,5 +25,14 @@ exports.handler = async () => {
     return response;
   } catch (err) {
     console.log("ERROR", err);
+    let response = {
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      isBase64Encoded: false,
+      body: JSON.stringify({ message: "something went wrong" }),
+    };
+    return response;
   }
 };
