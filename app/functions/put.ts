@@ -6,17 +6,19 @@ exports.handler = async (event: APIGatewayEvent) => {
   console.log("inside put function");
   const docClient = new DynamoDB.DocumentClient();
   const body = JSON.parse(event.body!);
-  const { id, todo, username, status } = body;
+  const { id, complete } = body;
   try {
     const data = await docClient
-      .put({
+      .update({
         TableName: process.env.TABLE_NAME || "",
-        Item: {
+        Key: {
           id: `${id}`,
-          todo: `${todo}`,
-          username: `${username}`,
-          status: status,
         },
+        UpdateExpression: "set complete = :val",
+        ExpressionAttributeValues: {
+          ":val": complete,
+        },
+        ReturnValues: "ALL_NEW",
       })
       .promise();
 

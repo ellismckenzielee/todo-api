@@ -15,7 +15,7 @@ exports.handler = async (event: APIGatewayEvent) => {
           id: `${id}`,
           todo: `${todo}`,
           username: `${username}`,
-          status: false,
+          complete: false,
         },
         ReturnValues: "ALL_NEW",
       })
