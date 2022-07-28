@@ -14,7 +14,7 @@ export class AppStack extends Stack {
     });
     const api = new aws_apigateway.RestApi(this, "todo-api");
     api.addApiKey("APIKEY", {
-      apiKeyName: "ELLIS_KEY",
+      apiKeyName: "API_KEY",
       value: process.env.API_KEY,
     });
     const todos = api.root.addResource("todos");
