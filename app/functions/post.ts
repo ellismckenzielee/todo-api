@@ -9,7 +9,12 @@ exports.handler = async (event: APIGatewayEvent) => {
     const data = await docClient
       .put({
         TableName: process.env.TABLE_NAME || "",
-        Item: { id: `${id}`, todo: `${todo}`, username: `${username}` },
+        Item: {
+          id: `${id}`,
+          todo: `${todo}`,
+          username: `${username}`,
+          status: false,
+        },
       })
       .promise();
 

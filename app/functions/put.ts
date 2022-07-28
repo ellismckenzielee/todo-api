@@ -1,13 +1,20 @@
+import { APIGatewayEvent } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
-exports.handler = async () => {
+exports.handler = async (event: APIGatewayEvent) => {
   console.log("inside put function");
   const docClient = new DynamoDB.DocumentClient();
-
+  const body = JSON.parse(event.body!);
+  const { id, todo, username, status } = body;
   try {
     const data = await docClient
       .put({
         TableName: process.env.TABLE_NAME || "",
-        Item: { id: "3", username: "calippo" },
+        Item: {
+          id: `${id}`,
+          todo: `${todo}`,
+          username: `${username}`,
+          status: status,
+        },
       })
       .promise();
 
