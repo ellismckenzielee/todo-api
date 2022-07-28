@@ -1,5 +1,7 @@
 import { APIGatewayEvent } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
+import generateResponse from "./utils/utils";
+
 exports.handler = async (event: APIGatewayEvent) => {
   console.log("inside put function");
   const docClient = new DynamoDB.DocumentClient();
@@ -18,17 +20,9 @@ exports.handler = async (event: APIGatewayEvent) => {
       })
       .promise();
 
-    let response = {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      isBase64Encoded: false,
-      body: JSON.stringify(data),
-    };
-    console.log("RESPONSE!!!!!", response);
-    return response;
+    return generateResponse(200, data);
   } catch (err) {
-    console.log("ERROR", err);
+    console.log("Error in PUT function", err);
+    return generateResponse(500, { message: "internal server error" });
   }
 };
