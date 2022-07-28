@@ -13,7 +13,7 @@ exports.handler = async (event: APIGatewayEvent) => {
 
     return generateResponse(200, { message: "success" });
   } catch (err) {
-    console.log("Error in delete lambda", err);
+    console.log("Error in delete function", err);
     return generateResponse(500, { message: "internal server error" });
   }
 };
