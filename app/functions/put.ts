@@ -1,6 +1,6 @@
 import { APIGatewayEvent } from "aws-lambda";
 import { DynamoDB } from "aws-sdk";
-import generateResponse from "./utils/utils";
+import generateResponse, { generate500 } from "./utils/utils";
 
 exports.handler = async (event: APIGatewayEvent) => {
   console.log("inside put function");
@@ -23,6 +23,6 @@ exports.handler = async (event: APIGatewayEvent) => {
     return generateResponse(200, data);
   } catch (err) {
     console.log("Error in PUT function", err);
-    return generateResponse(500, { message: "internal server error" });
+    return generate500();
   }
 };

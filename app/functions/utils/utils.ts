@@ -8,3 +8,7 @@ export default function generateResponse(status: number, data: Object) {
     body: JSON.stringify(data),
   };
 }
+
+export function generate500() {
+  return generateResponse(500, {message: 'internal server error'})
+}
