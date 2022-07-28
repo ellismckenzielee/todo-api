@@ -11,13 +11,13 @@ exports.handler = async (event: APIGatewayEvent) => {
     const data = await docClient
       .put({
         TableName: process.env.TABLE_NAME || "",
+        ConditionExpression: "attribute_not_exists(id)",
         Item: {
           id: `${id}`,
           todo: `${todo}`,
           username: `${username}`,
           complete: false,
         },
-        ReturnValues: "ALL_NEW",
       })
       .promise();
     return generateResponse(200, data);
